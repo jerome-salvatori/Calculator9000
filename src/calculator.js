@@ -62,8 +62,8 @@ class Calculator extends React.Component {
             this.setState({resultat: parseInt(val), last_int: parseInt(val), last_entry: val});
         } else if (operators.includes(val) && this.state.ops_array.length > 3 && !operators.includes(this.state.last_entry)) {
             if (this.state.last_operator !== "") {
-                console.log(typeof(this.state.resultat));
-                console.log(typeof(this.state.last_int));
+                /*console.log(typeof(this.state.resultat));
+                console.log(typeof(this.state.last_int));*/
                 n_res = this.mathFunc(this.state.resultat, this.state.last_int, this.state.last_operator);
                 console.log(n_res);
                 this.setState({resultat: n_res});
@@ -89,7 +89,13 @@ class Calculator extends React.Component {
                 //new_array = new_array.splice(-2, 2, n_int);
                 new_array.splice(-2, 2, n_int);
                 //console.log(new_array);
-                this.setState({ops_array: new_array, last_int: parseInt(n_int), last_entry: n_int, resultat: parseInt(n_int)});
+                //this.setState({ops_array: new_array, last_int: parseInt(n_int), last_entry: n_int, resultat: parseInt(n_int)});
+                if (new_array.length === 3) {
+                    this.setState({ops_array: new_array, last_int: parseInt(n_int), last_entry: n_int});
+                } else if (new_array.length === 1) {
+                    this.setState({ops_array: new_array, last_int: parseInt(n_int), last_entry: n_int, resultat: parseInt(n_int)});
+                }
+                
             } else if (this.state.last_entry == "=") {
                 this.setState({resultat: parseInt(val), ops_array: [val], last_int: parseInt(val), last_entry: val, last_operator: ""});
             } else {
